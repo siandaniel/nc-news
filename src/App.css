@@ -6,8 +6,12 @@
 }
 
 body {
-  background-color: rgb(246, 238, 247);
-  width: 100vw;
+  /* background-color: rgb(246, 238, 247); */
+  background-image: url('./images/news-background.jpeg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100vh;
 }
 
 .App {
