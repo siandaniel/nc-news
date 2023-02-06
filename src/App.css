@@ -122,6 +122,10 @@ img {
   max-height: 90%;
 }
 
+#loading-img {
+  max-width: 80vw;
+}
+
 @media (min-width: 750px) {
 
   .articles-container {
@@ -138,5 +142,11 @@ img {
     margin: 2vh auto;
     width: 400px;
   }
+
+  #loading-img {
+    height: 60vh;
+    width: auto;
+  }
+  
 
 }

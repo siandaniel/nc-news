@@ -6,13 +6,24 @@ import MostRecent from "./MostRecent";
 function Articles() {
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
+    const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
+        setIsLoading(true);
         getArticles().then((articlesFromApi) => {
-          setArticles(articlesFromApi)
-          setMostRecent(articlesFromApi[0])
+          setArticles(articlesFromApi);
+          setMostRecent(articlesFromApi[0]);
+          setIsLoading(false);
         })
       }, [])
+
+    if (isLoading) {
+        return (
+            <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img"/>
+        )
+    }
+
+    else {
 
     return (
       <section className="articles-section">
@@ -24,6 +35,8 @@ function Articles() {
         </section>
       </section>
     );
+
+    }
 }
 
 export default Articles;
