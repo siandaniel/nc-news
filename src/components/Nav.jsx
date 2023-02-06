@@ -1,7 +1,7 @@
 function Nav() {
     return (
       <nav>
-        <p>NAV BAR</p>
+        <p>NAV BAR WILL GO HERE</p>
       </nav>
     );
 }

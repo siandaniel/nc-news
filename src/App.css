@@ -1,3 +1,123 @@
+/* MAIN */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(246, 238, 247);
+  width: 100vw;
+}
+
 .App {
   text-align: center;
+  width: 100vw;
+}
+
+/* NAV and HEADERS */
+
+ nav {
+  background-color: azure;
+  width: 100%;
+  height: 5vh;
+  align-content: center;
+  justify-content: center;
+ }
+
+h1 {
+  font-size: 4.5rem;
+  margin: 2vh 2vw;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: left;
+  width: 70vw;
+  margin: 2vh auto;
+}
+
+h3 {
+  text-align: left;
+}
+
+/* MOST RECENT */
+
+.most-recent {
+  box-sizing: content-box;
+  width: 85vw;
+  margin: 4vh auto;
+  padding: 1vh 0;
+  background-color: white;
+}
+
+#most-recent-img {
+  width: 70vw;
+}
+
+.most-recent-details {
+  width: 70vw;
+  margin: 1vh auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "topic author votes";
+}
+
+.recent-header {
+  font-size: 1.5rem;
+  width: 70vw;
+  margin: 1vh auto;
+  text-align: left;
+  grid-area: "header";
+}
+
+.recent-topic {
+  grid-area: "topic";
+  background-color: rgb(181, 178, 178);
+  width: fit-content;
+}
+
+.recent-author {
+  grid-area: "author";
+}
+
+.recent-votes {
+  grid-area: "votes";
+}
+
+/* ARTICLES */
+
+.articles-container {
+  box-sizing: content-box;
+  width: 85vw;
+  margin: auto auto 5vh auto;
+  padding: 0 20px;
+}
+
+.article-card {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  border: 1px solid rgb(156, 156, 156);
+  align-items: center;
+  justify-items: center;
+  margin: 2vh auto;
+  text-align: right;
+}
+
+.article-details {
+  box-sizing: border-box;
+  margin: 1vh 2vw;
+}
+
+.topic-label {
+  background-color: rgb(181, 178, 178);
+  width: fit-content;
+  margin: auto 0 auto auto;
+}
+
+img {
+  width: 90%;
+  max-height: 90%;
 }

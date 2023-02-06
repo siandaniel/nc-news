@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import MostRecent from "./MostRecent";
 
 function Articles() {
     const [articles, setArticles] = useState([]);
@@ -13,10 +14,12 @@ function Articles() {
 
     return (
       <section className="articles-section">
-        <h2>ALL ARTICLES</h2>
-        {articles.map((article) => {
-          return <ArticleCard article={article} key={article.article_id} />
+        <MostRecent articles={articles}/>
+        <section className="articles-container">
+        {articles.map((article, index) => {
+            return index === 0 ? "" : <ArticleCard article={article} key={article.article_id}/>
         })}
+        </section>
       </section>
     );
 }
