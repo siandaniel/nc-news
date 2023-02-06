@@ -1,7 +1,7 @@
 function Nav() {
     return (
       <nav>
-        <p>NAV</p>
+        <p>NAV BAR</p>
       </nav>
     );
 }

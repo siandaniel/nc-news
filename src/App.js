@@ -7,8 +7,8 @@ import Articles from './components/Articles';
 function App() {
   return (
     <div className="App">
-            <Nav/>
-            <Header/>
+      <Nav/>
+      <Header/>
       <Routes>
         <Route path='/articles' element={<Articles/>}></Route>
       </Routes>
