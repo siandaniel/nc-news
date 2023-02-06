@@ -39,6 +39,7 @@ h2 {
 
 h3 {
   text-align: left;
+  margin-bottom: 1vh;
 }
 
 /* MOST RECENT */
@@ -99,7 +100,6 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  border: 1px solid rgb(156, 156, 156);
   align-items: center;
   justify-items: center;
   margin: 2vh auto;
@@ -120,4 +120,23 @@ h3 {
 img {
   width: 90%;
   max-height: 90%;
+}
+
+@media (min-width: 750px) {
+
+  .articles-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    width: 90vw;
+    margin: auto;
+    padding: 0 20px;
+  }
+  
+  .article-card {
+    margin: 2vh auto;
+    width: 400px;
+  }
+
 }
