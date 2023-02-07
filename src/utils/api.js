@@ -8,3 +8,10 @@ export const getArticles = () => {
             return data.articles;
         })
 }
+
+export const getCommentsByArticleId = (article_id) => {
+    return ncNewsApi.get(`/articles/${article_id}/comments`)
+    .then(({data}) => {
+        return data.comments;
+    })
+}
