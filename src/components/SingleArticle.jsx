@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
 import Comments from "./Comments";
 
-function SingleArticle({ isLoading, setIsLoading }) {
+function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
     const { article_id } = useParams();
     const [singleArticle, setSingleArticle] = useState({});
     const [author, setAuthor] = useState({});
@@ -37,6 +37,33 @@ function SingleArticle({ isLoading, setIsLoading }) {
             })
             setVoteError("Oops - something went wrong!")
         })
+        setUserVotes((currUserVotes) => {
+            return {
+                ...currUserVotes,
+                [article_id]: {[e.target.value]: true}
+            }
+        })
+    }
+
+    const undoVote = (e) => {
+        const voteToUndo = +e.target.value;
+        const inverseNum = voteToUndo * -1;
+        setVoteError("");
+        setVotes((currVote) => {
+            return currVote + inverseNum;
+        })
+        updateVotes(article_id, inverseNum).catch((err) => {
+            setVotes((currVote) => {
+                return currVote - inverseNum;
+            })
+            setVoteError("Oops - something went wrong!")
+        })
+        setUserVotes((currUserVotes) => {
+            return {
+                ...currUserVotes,
+                [article_id]: {[e.target.value]: false}
+            }
+        })
     }
 
     if (isLoading) {
@@ -59,8 +86,8 @@ function SingleArticle({ isLoading, setIsLoading }) {
                 <p className="article-body">{singleArticle.body}</p>
                 <section className="votes">
                     <p>❤️ Votes: {votes}</p>
-                    <button onClick={updateVoteNum} value="1">❤️ +1</button>
-                    <button onClick={updateVoteNum} value="-1">👎 -1</button>
+                    <button onClick={userVotes[article_id]? undoVote : updateVoteNum} disabled={userVotes[article_id]} value="1" >❤️ +1</button>
+                    <button onClick={userVotes[article_id]? undoVote : updateVoteNum} disabled={userVotes[article_id]} value="-1" >👎 -1</button>
                 </section>
                 <p id="vote-error">{voteError}</p>
                 <br></br>
