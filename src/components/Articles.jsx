@@ -3,10 +3,9 @@ import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import MostRecent from "./MostRecent";
 
-function Articles() {
+function Articles({isLoading, setIsLoading}) {
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
-    const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
         setIsLoading(true);
@@ -15,7 +14,7 @@ function Articles() {
           setMostRecent(articlesFromApi[0]);
           setIsLoading(false);
         })
-      }, [])
+      }, [setIsLoading])
 
     if (isLoading) {
         return (
