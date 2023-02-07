@@ -29,3 +29,12 @@ export const getUserByUsername = (username) => {
             return data.user;
         })
 }
+
+export const postComment = (article_id, newComment) => {
+    console.log(newComment, "newCommet in UTILS")
+    return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+        .then(({data}) => {
+            console.log(data, "<<DATA IN UTILS")
+            // return data.user;
+        })
+}
