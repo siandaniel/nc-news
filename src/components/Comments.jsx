@@ -23,7 +23,7 @@ function Comments() {
         return (
             <div id="comment-loading">
             <p>Comments Loading...</p>
-            <img src="https://cdn.pixabay.com/animation/2022/12/26/19/45/19-45-46-138_512.gif" alt="loading"/>
+            <img src="https://i.stack.imgur.com/kOnzy.gif" alt="loading"/>
             </div>
         )
     }
