@@ -265,8 +265,11 @@ button {
 
 #comment-loading {
   margin: 3vh auto;
-  height: 100px;
-  width: 30vw;
+}
+
+#comment-loading img {
+  height: 50px;
+  width: 50px;
 }
 
 @media (min-width: 750px) {
