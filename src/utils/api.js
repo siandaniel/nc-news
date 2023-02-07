@@ -15,3 +15,10 @@ export const getArticleById = (article_id) => {
             return data.requestedArticle;
         })
 }
+
+export const getUserByUsername = (username) => {
+    return ncNewsApi.get(`/users/${username}`)
+        .then(({data}) => {
+            return data.user;
+        })
+}
