@@ -154,7 +154,7 @@ img {
 /* SINGLE ARTICLE */
 
 .single-article {
-  box-sizing: content-box;
+  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.7);
   width: 85vw;
   margin: auto auto 1vh auto;
@@ -169,6 +169,7 @@ img {
 
 .single-article-details {
   display: flex;
+  flex-wrap: wrap;
   justify-content: left;
   align-items: center;
 }
@@ -178,8 +179,8 @@ img {
 }
 
 .article-body {
-  width: 80vw;
-  margin: 1vh 0 3vh 0;
+  width: fit-content;
+  margin: 1vh 2vw 3vh 0;
 }
 
 .single-article img {
@@ -192,6 +193,58 @@ img {
   margin: 0px 1vw 0px 0px;
   border: solid 1px black;
   border-radius: 50%;
+}
+
+
+/* COMMENTS */
+
+.comments-section {
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  width: 85vw;
+  margin: 5vh auto 4vh auto;
+  border-radius: 10px;
+  padding-bottom: 2vh;
+}
+
+.comments-section h3 {
+  background-color: rgb(218, 180, 253);
+  margin-bottom: 3vh;
+  padding: 1vh 1vw;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.comment-poster {
+  margin: auto auto 5vh auto;
+}
+
+form {
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  padding: 0 2vw;
+}
+
+textarea {
+  width: 80vw;
+  margin: 1vh auto;
+}
+
+button {
+  width: 30vw;
+  margin: 1vh auto;
+}
+
+.comment-card {
+  margin: 2vh 2vw;
+  padding: 2vh 1vw;
+  border-top: 1px solid rgb(134, 134, 134);
+}
+
+#comment-loading {
+  margin: 3vh auto;
+  height: 100px;
+  width: 30vw;
 }
 
 @media (min-width: 750px) {
@@ -215,6 +268,39 @@ img {
     height: 60vh;
     width: auto;
   }
+
+  #author-avatar {
+    width: 30px;
+    height: 30px;
+    margin: 0px 1vw 0px 0px;
+    border: solid 1px black;
+    border-radius: 50%;
+  }
+
+  .article-body {
+    width: 80vw;
+    margin: 1vh 0 3vh 0;
+  }
+
+  .comment-poster {
+    margin: auto auto 3vh auto;
+  }
   
+  form {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 0 2vw;
+  }
+  
+  textarea {
+    width: 60vw;
+    margin: 1vh auto;
+  }
+  
+  button {
+    width: 10vw;
+    margin: 1vh auto;
+  }
 
 }
