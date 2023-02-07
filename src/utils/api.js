@@ -9,6 +9,13 @@ export const getArticles = () => {
         })
 }
 
+export const getCommentsByArticleId = (article_id) => {
+    return ncNewsApi.get(`/articles/${article_id}/comments`)
+    .then(({data}) => {
+        return data.comments;
+    })
+}
+
 export const getArticleById = (article_id) => {
     return ncNewsApi.get(`/articles/${article_id}`)
         .then(({data}) => {
@@ -20,5 +27,14 @@ export const getUserByUsername = (username) => {
     return ncNewsApi.get(`/users/${username}`)
         .then(({data}) => {
             return data.user;
+        })
+}
+
+export const postComment = (article_id, newComment) => {
+    console.log(newComment, "newCommet in UTILS")
+    return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+        .then(({data}) => {
+            console.log(data, "<<DATA IN UTILS")
+            // return data.user;
         })
 }

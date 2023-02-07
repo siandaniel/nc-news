@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getArticleById, getUserByUsername } from "../utils/api";
+import Comments from "./Comments";
 
 function SingleArticle({ isLoading, setIsLoading }) {
     const { article_id } = useParams();
@@ -42,7 +43,8 @@ function SingleArticle({ isLoading, setIsLoading }) {
     }
 
     return (
-        <section className="single-article">
+        <section>
+        <article className="single-article">
             <h2>{singleArticle.title}</h2>
             <div className="single-article-details">
                 <img id="author-avatar" src={author.avatar_url} alt={singleArticle.author} />
@@ -58,6 +60,9 @@ function SingleArticle({ isLoading, setIsLoading }) {
                 <button onClick={downVote}>👎 -1</button>
             </section>
         <br></br>
+            <br></br>
+        </article>
+        <Comments/>
         </section>
     )
 }
