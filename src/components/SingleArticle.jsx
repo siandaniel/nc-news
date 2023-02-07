@@ -35,6 +35,9 @@ function SingleArticle({isLoading, setIsLoading}) {
                 <p>{singleArticle.author}</p>
                 <p className="topic-label">{singleArticle.topic}</p>
                 <p>{singleArticle.created_at}</p>
+                <p className="votes">Votes: {singleArticle.votes}</p>
+                <button>Vote Up</button>
+                <button>Vote Down</button>
             </div>
             <img src={singleArticle.article_img_url} alt={singleArticle.title} />
             <p className="article-body">{singleArticle.body}</p>
