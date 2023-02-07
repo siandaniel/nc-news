@@ -210,6 +210,13 @@ img {
   padding: 3px;
 }
 
+#vote-error {
+  margin-top: 5px;
+  font-size: 10pt;
+  font-weight: bold;
+  text-align: right;
+}
+
 
 /* COMMENTS */
 

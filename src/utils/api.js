@@ -30,11 +30,21 @@ export const getUserByUsername = (username) => {
         })
 }
 
-export const postComment = (article_id, newComment) => {
-    console.log(newComment, "newCommet in UTILS")
-    return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+// export const postComment = (article_id, newComment) => {
+//     console.log(newComment, "newCommet in UTILS")
+//     return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+//         .then(({data}) => {
+//             console.log(data, "<<DATA IN UTILS")
+//             // return data.user;
+//         })
+// }
+
+export const updateVotes = (article_id, number) => {
+    const voteUpdate = {
+        "inc_votes": +number
+    }
+    return ncNewsApi.patch(`/articles/${article_id}`, voteUpdate)
         .then(({data}) => {
-            console.log(data, "<<DATA IN UTILS")
-            // return data.user;
+            return data.updatedArticle;
         })
 }

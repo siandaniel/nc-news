@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getArticleById, getUserByUsername } from "../utils/api";
+import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
 import Comments from "./Comments";
 
 function SingleArticle({ isLoading, setIsLoading }) {
@@ -9,6 +9,7 @@ function SingleArticle({ isLoading, setIsLoading }) {
     const [singleArticle, setSingleArticle] = useState({});
     const [author, setAuthor] = useState({});
     const [votes, setVotes] = useState();
+    const [error, setError] = useState("");
 
     useEffect(() => {
         setIsLoading(true)
@@ -25,14 +26,30 @@ function SingleArticle({ isLoading, setIsLoading }) {
     }, [article_id, setIsLoading])
 
     const upVote = (e) => {
+        setError("");
         setVotes((currVote) => {
             return currVote + 1;
+        })
+        updateVotes(article_id, 1).catch((err) => {
+            console.log(err, "<<<ERROR")
+            setVotes((currVote) => {
+                return currVote - 1;
+            })
+            setError("Oops - something went wrong!")
         })
     }
 
     const downVote = (e) => {
+        setError("");
         setVotes((currVote) => {
             return currVote - 1;
+        })
+        updateVotes(article_id, -1).catch((err) => {
+            console.log(err, "<<<ERROR")
+            setVotes((currVote) => {
+                return currVote + 1;
+            })
+            setError("Oops - something went wrong!")
         })
     }
 
@@ -59,6 +76,7 @@ function SingleArticle({ isLoading, setIsLoading }) {
                     <button onClick={upVote}>❤️ +1</button>
                     <button onClick={downVote}>👎 -1</button>
                 </section>
+                <p id="vote-error">{error}</p>
                 <br></br>
             </article>
             <Comments />
