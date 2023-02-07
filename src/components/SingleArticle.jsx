@@ -3,21 +3,29 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getArticleById, getUserByUsername } from "../utils/api";
 
-function SingleArticle() {
+function SingleArticle({isLoading, setIsLoading}) {
     const { article_id } = useParams();
     const [singleArticle, setSingleArticle] = useState({});
     const [author, setAuthor] = useState({});
 
     useEffect(() => {
+        setIsLoading(true)
         getArticleById(article_id)
             .then((articleFromApi) => {
                 setSingleArticle(articleFromApi)
                 getUserByUsername(articleFromApi.author)
                     .then((author) => {
-                        setAuthor(author)
+                        setAuthor(author);
+                        setIsLoading(false);
                     })
             })
-    }, [article_id])
+    }, [article_id, setIsLoading])
+
+    if (isLoading) {
+        return (
+            <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img"/>
+        )
+    }
 
     return (
         <section className="single-article">
