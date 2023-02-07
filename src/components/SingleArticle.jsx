@@ -44,25 +44,24 @@ function SingleArticle({ isLoading, setIsLoading }) {
 
     return (
         <section>
-        <article className="single-article">
-            <h2>{singleArticle.title}</h2>
-            <div className="single-article-details">
-                <img id="author-avatar" src={author.avatar_url} alt={singleArticle.author} />
-                <p>{singleArticle.author}</p>
-                <p className="topic-label">{singleArticle.topic}</p>
-                <p>{singleArticle.created_at}</p>
-            </div>
-            <img src={singleArticle.article_img_url} alt={singleArticle.title} />
-            <p className="article-body">{singleArticle.body}</p>
-            <section className="votes">
-                <p>❤️ Votes: {votes}</p>
-                <button onClick={upVote}>❤️ +1</button>
-                <button onClick={downVote}>👎 -1</button>
-            </section>
-        <br></br>
-            <br></br>
-        </article>
-        <Comments/>
+            <article className="single-article">
+                <h2>{singleArticle.title}</h2>
+                <div className="single-article-details">
+                    <img id="author-avatar" src={author.avatar_url} alt={singleArticle.author} />
+                    <p>{singleArticle.author}</p>
+                    <p className="topic-label">{singleArticle.topic}</p>
+                    <p>{singleArticle.created_at}</p>
+                </div>
+                <img src={singleArticle.article_img_url} alt={singleArticle.title} />
+                <p className="article-body">{singleArticle.body}</p>
+                <section className="votes">
+                    <p>❤️ Votes: {votes}</p>
+                    <button onClick={upVote}>❤️ +1</button>
+                    <button onClick={downVote}>👎 -1</button>
+                </section>
+                <br></br>
+            </article>
+            <Comments />
         </section>
     )
 }
