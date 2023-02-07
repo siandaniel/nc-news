@@ -31,7 +31,7 @@ function SingleArticle({isLoading, setIsLoading}) {
         <section className="single-article">
             <h2>{singleArticle.title}</h2>
             <div className="single-article-details">
-                <img id="author-avatar" src={author.avatar_url} alt={author.username} />
+                <img id="author-avatar" src={author.avatar_url} alt={singleArticle.author} />
                 <p>{singleArticle.author}</p>
                 <p className="topic-label">{singleArticle.topic}</p>
                 <p>{singleArticle.created_at}</p>
