@@ -204,6 +204,7 @@ img {
   width: 85vw;
   margin: 5vh auto 4vh auto;
   border-radius: 10px;
+  padding-bottom: 2vh;
 }
 
 .comments-section h3 {
@@ -238,6 +239,12 @@ button {
   margin: 2vh 2vw;
   padding: 2vh 1vw;
   border-top: 1px solid rgb(134, 134, 134);
+}
+
+#comment-loading {
+  margin: 3vh auto;
+  height: 100px;
+  width: 30vw;
 }
 
 @media (min-width: 750px) {
