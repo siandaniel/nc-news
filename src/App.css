@@ -210,6 +210,12 @@ img {
   padding: 3px;
 }
 
+.selected-vote-button {
+  background-color: rgb(175, 243, 243);
+  box-shadow: 0px 0px 10px rgb(211, 252, 255);
+  border: 2px solid grey;
+}
+
 #vote-error {
   margin-top: 5px;
   font-size: 10pt;

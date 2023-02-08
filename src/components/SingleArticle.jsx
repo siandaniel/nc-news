@@ -10,6 +10,7 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
     const [author, setAuthor] = useState({});
     const [votes, setVotes] = useState();
     const [voteError, setVoteError] = useState("");
+    const [selectedButton, setSelectedButton] = useState("");
 
     useEffect(() => {
         setIsLoading(true)
@@ -27,6 +28,7 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
 
     const updateVoteNum = (e) => {
         const newVotes = +e.target.value;
+        setSelectedButton(e.target.value);
         setVoteError("");
         setVotes((currVote) => {
             return currVote + newVotes;
@@ -35,20 +37,22 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
             setVotes((currVote) => {
                 return currVote - newVotes;
             })
-            setVoteError("Oops - something went wrong!")
+            setVoteError("Oops - something went wrong!");
+            setSelectedButton("");
         })
         setUserVotes((currUserVotes) => {
             return {
                 ...currUserVotes,
-                [article_id]: {[e.target.value]: true}
+                [article_id]: e.target.value
             }
         })
     }
 
     const undoVote = (e) => {
-        const voteToUndo = +e.target.value;
-        const inverseNum = voteToUndo * -1;
+        const newVotes = +e.target.value;
+        const inverseNum = newVotes * -1;
         setVoteError("");
+        setSelectedButton("");
         setVotes((currVote) => {
             return currVote + inverseNum;
         })
@@ -57,11 +61,12 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
                 return currVote - inverseNum;
             })
             setVoteError("Oops - something went wrong!")
+            setSelectedButton(e.target.value);
         })
         setUserVotes((currUserVotes) => {
             return {
                 ...currUserVotes,
-                [article_id]: {[e.target.value]: false}
+                [article_id]: ""
             }
         })
     }
@@ -86,8 +91,16 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
                 <p className="article-body">{singleArticle.body}</p>
                 <section className="votes">
                     <p>❤️ Votes: {votes}</p>
-                    <button onClick={userVotes[article_id]? undoVote : updateVoteNum} disabled={userVotes[article_id]} value="1" >❤️ +1</button>
-                    <button onClick={userVotes[article_id]? undoVote : updateVoteNum} disabled={userVotes[article_id]} value="-1" >👎 -1</button>
+                    <button 
+                        onClick={userVotes[article_id] === "1" ? undoVote : updateVoteNum} 
+                        disabled={userVotes[article_id] === "-1"} 
+                        value="1" 
+                        className={selectedButton === "1" ? "selected-vote-button" : ""} >❤️ +1</button>
+                    <button 
+                        onClick={userVotes[article_id] === "-1" ? undoVote : updateVoteNum} 
+                        disabled={userVotes[article_id] === "1"} 
+                        value="-1" 
+                        className={selectedButton === "-1" ? "selected-vote-button" : ""} >👎 -1</button>
                 </section>
                 <p id="vote-error">{voteError}</p>
                 <br></br>
