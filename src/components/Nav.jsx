@@ -42,7 +42,7 @@ function Nav({setUserVoteRecord}) {
     <nav>
       <Link to="/">Home</Link>
       {topics.map((topic) => {
-            return <Link to={`/${topic.slug}`} key={topic.slug}>{topic.slug}</Link>
+            return <Link to={`/articles/${topic.slug}`} key={topic.slug}>{topic.slug}</Link>
           })}
       <div id="logged-in-user">
         {signedIn ? <p>Hello <b>{loggedInUser.username}</b>!</p> : ""}
