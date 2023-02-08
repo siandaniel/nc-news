@@ -24,10 +24,11 @@ body {
 nav {
   background-color: azure;
   width: 100%;
-  height: 5vh;
+  height: 7vh;
   display: flex;
   align-content: center;
-  justify-content: left;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav a {
@@ -35,7 +36,19 @@ nav a {
 }
 
 nav p {
-  margin: auto 30px;
+  margin: auto 10px;
+}
+
+nav img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+#logged-in-user {
+  display: flex;
+  margin-right: 10px;
 }
 
 h1 {
