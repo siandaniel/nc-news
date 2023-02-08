@@ -8,7 +8,6 @@ import SingleArticle from './components/SingleArticle';
 
 function App() {
   const [isLoading, setIsLoading] = useState();
-  const [userVotes, setUserVotes] = useState({});
 
   return (
     <div className="App">
@@ -16,7 +15,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
-        <Route path='/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading} userVotes={userVotes} setUserVotes={setUserVotes}/>}></Route>
+        <Route path='/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
       </Routes>
     </div>
   );

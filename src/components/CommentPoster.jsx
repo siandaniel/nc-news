@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { postComment } from "../utils/api";
+import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 
 function CommentPoster({setComments}) {
     const { article_id } = useParams();
+    const { loggedInUser } = useContext(LoggedInUserContext);
     const [newComment, setNewComment] = useState({
         "body": "",
-        "username": "cooljmessy"
+        "username": loggedInUser.username
     })
     const [posting, setPosting] = useState("");
 
@@ -30,7 +32,7 @@ function CommentPoster({setComments}) {
                 setPosting("posted");
                 setNewComment({
                     "body": "",
-                    "username": "cooljmessy"
+                    "username": loggedInUser.username
                 });
             })
     }
@@ -46,7 +48,7 @@ function CommentPoster({setComments}) {
                 required
                 onChange={onChange}
             ></textarea>
-            <button type="submit">Post</button>
+            <button type="submit" disabled={posting === "posting"}>Post</button>
         </form>
         {posting === "posting" ? <p className="feedback">Posting...</p> : posting === "posted" ? <p className="feedback">Your comment has been posted!</p> : ""}
         </section>

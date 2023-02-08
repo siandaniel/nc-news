@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
+import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
+import { useContext } from 'react';
 import Comments from "./Comments";
 
-function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
+function SingleArticle({ isLoading, setIsLoading }) {
     const { article_id } = useParams();
+    const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
     const [singleArticle, setSingleArticle] = useState({});
     const [articleAuthor, setArticleAuthor] = useState({});
     const [votes, setVotes] = useState();
@@ -40,10 +43,10 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
             setVoteError("Oops - something went wrong!");
             setSelectedButton("");
         })
-        setUserVotes((currUserVotes) => {
+        setLoggedInUser((currLoggedInUser) => {
             return {
-                ...currUserVotes,
-                [article_id]: e.target.value
+                ...currLoggedInUser,
+                votes: {[article_id]: e.target.value}
             }
         })
     }
@@ -63,10 +66,10 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
             setVoteError("Oops - something went wrong!")
             setSelectedButton(e.target.value);
         })
-        setUserVotes((currUserVotes) => {
+        setLoggedInUser((currLoggedInUser) => {
             return {
-                ...currUserVotes,
-                [article_id]: ""
+                ...currLoggedInUser,
+                votes: {[article_id]: ""}
             }
         })
     }
@@ -94,13 +97,13 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
                 <section className="votes">
                     <p>❤️ Votes: {votes}</p>
                     <button 
-                        onClick={userVotes[article_id] === "1" ? undoVote : updateVoteNum} 
-                        disabled={userVotes[article_id] === "-1"} 
+                        onClick={loggedInUser.votes[article_id] === "1" ? undoVote : updateVoteNum} 
+                        disabled={loggedInUser.votes[article_id] === "-1"} 
                         value="1" 
                         className={selectedButton === "1" ? "selected-vote-button" : ""} >❤️ +1</button>
                     <button 
-                        onClick={userVotes[article_id] === "-1" ? undoVote : updateVoteNum} 
-                        disabled={userVotes[article_id] === "1"} 
+                        onClick={loggedInUser.votes[article_id] === "-1" ? undoVote : updateVoteNum} 
+                        disabled={loggedInUser.votes[article_id] === "1"} 
                         value="-1" 
                         className={selectedButton === "-1" ? "selected-vote-button" : ""} >👎 -1</button>
                 </section>
