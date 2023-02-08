@@ -39,3 +39,10 @@ export const updateVotes = (article_id, number) => {
             return data.updatedArticle;
         })
 }
+
+export const postComment = (article_id, newComment) => {
+    return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+        .then(({data}) => {
+            return data.commentPosted;
+        })
+}

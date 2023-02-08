@@ -244,13 +244,20 @@ img {
 }
 
 .comment-poster {
-  margin: auto auto 5vh auto;
+  margin: auto auto 1vh auto;
 }
 
 form {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   padding: 0 2vw;
+  margin: 0 auto;
+}
+
+.feedback {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(32, 135, 169);
 }
 
 textarea {
@@ -314,7 +321,7 @@ button {
   }
 
   .comment-poster {
-    margin: auto auto 3vh auto;
+    margin: auto auto 1vh auto;
   }
   
   form {

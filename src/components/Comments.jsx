@@ -33,7 +33,7 @@ function Comments() {
             <h3>Comments</h3>
             {comments.length === 0 ? <p><b>There are no comments on this article yet. </b><em>Want to be the first to post?</em></p>: "" }
             {comments.length === 0 ? <br></br> : "" }
-            <CommentPoster/>
+            <CommentPoster setComments={setComments}/>
             <section className="comments-container">
                 {comments.map((comment) => {
                     return <CommentCard comment={comment} key={comment.comment_id} />
