@@ -46,3 +46,10 @@ export const getTopics = () => {
         return data.topics;
     })
 }
+
+export const postComment = (article_id, newComment) => {
+    return ncNewsApi.post(`/articles/${article_id}/comments`, newComment)
+        .then(({data}) => {
+            return data.commentPosted;
+        })
+}

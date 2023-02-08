@@ -24,11 +24,11 @@ body {
 nav {
   background-color: azure;
   width: 100%;
-  height: 5vh;
+  height: 100px;
   display: flex;
   align-content: center;
-  justify-content: left;
-  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav a {
@@ -40,7 +40,26 @@ nav a {
 }
 
 nav p {
-  margin: auto 30px;
+  margin: auto 10px;
+}
+
+nav img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+nav button {
+  margin: 0 10px 0 10px;
+  width: 60px;
+  height: 20px;
+  font-size: 0.7rem;
+}
+
+#logged-in-user {
+  display: flex;
+  margin-right: 10px;
 }
 
 h1 {
@@ -249,13 +268,20 @@ img {
 }
 
 .comment-poster {
-  margin: auto auto 5vh auto;
+  margin: auto auto 1vh auto;
 }
 
 form {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   padding: 0 2vw;
+  margin: 0 auto;
+}
+
+.feedback {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(32, 135, 169);
 }
 
 textarea {
@@ -284,6 +310,10 @@ button {
 }
 
 @media (min-width: 750px) {
+
+  nav {
+    height: 50px;
+  }
 
   .articles-container {
     display: flex;
@@ -319,7 +349,7 @@ button {
   }
 
   .comment-poster {
-    margin: auto auto 3vh auto;
+    margin: auto auto 1vh auto;
   }
   
   form {
