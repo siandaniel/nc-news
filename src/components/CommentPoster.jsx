@@ -23,17 +23,32 @@ function CommentPoster({setComments}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setPosting("posting")
+        setPosting("posting");
+        setComments((currComments) => {
+            return [{
+                "comment_id": "tbc",
+                "body": newComment.body,
+                "article_id": article_id,
+                "author": loggedInUser.username,
+                "votes": 0,
+                "created_at": "Just now"
+            }, ...currComments]
+        })
         postComment(article_id, newComment)
             .then((postedComment) => {
-                setComments((currComments) => {
-                    return [postedComment, ...currComments]
-                })
                 setPosting("posted");
                 setNewComment({
                     "body": "",
                     "username": loggedInUser.username
                 });
+            })
+            .catch((err) => {
+                setPosting("error");
+                setComments((currComments) => {
+                    const revisedComments = [...currComments]
+                    revisedComments.shift()
+                    return revisedComments
+                })
             })
     }
 
@@ -50,7 +65,9 @@ function CommentPoster({setComments}) {
             ></textarea>
             <button type="submit" disabled={posting === "posting"}>Post</button>
         </form>
-        {posting === "posting" ? <p className="feedback">Posting...</p> : posting === "posted" ? <p className="feedback">Your comment has been posted!</p> : ""}
+        {posting === "posting" ? <p className="feedback">Posting...</p> : 
+        posting === "posted" ? <p className="feedback">Your comment has been posted!</p> :
+        posting === "error" ? <p className="feedback">Oops - something went wrong!</p> : ""}
         </section>
     );
 }
