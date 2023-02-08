@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getTopics } from "../utils/api";
 
 function Nav() {
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    // setIsLoading(true);
+    getTopics().then((topicsFromApi) => {
+      setTopics(topicsFromApi);
+      // setIsLoading(false);
+    })
+  }, [])
+
     return (
       <nav>
           <Link to="/">Home</Link>
-          <p>REST OF NAV BAR WILL GO HERE</p>
+          {topics.map((topic) => {
+            return <Link to={`/${topic.slug}`} key={topic.slug}>{topic.slug}</Link>
+          })}
       </nav>
     );
 }

@@ -28,10 +28,15 @@ nav {
   display: flex;
   align-content: center;
   justify-content: left;
+  overflow: hidden;
 }
 
 nav a {
-  margin: auto 30px;
+  float: left;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  margin: auto 10px;
 }
 
 nav p {

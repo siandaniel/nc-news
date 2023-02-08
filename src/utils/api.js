@@ -39,3 +39,10 @@ export const updateVotes = (article_id, number) => {
             return data.updatedArticle;
         })
 }
+
+export const getTopics = () => {
+    return ncNewsApi.get(`/topics`)
+    .then(({data}) => {
+        return data.topics;
+    })
+}
