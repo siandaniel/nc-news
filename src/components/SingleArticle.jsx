@@ -7,7 +7,7 @@ import Comments from "./Comments";
 function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
     const { article_id } = useParams();
     const [singleArticle, setSingleArticle] = useState({});
-    const [author, setAuthor] = useState({});
+    const [articleAuthor, setArticleAuthor] = useState({});
     const [votes, setVotes] = useState();
     const [voteError, setVoteError] = useState("");
     const [selectedButton, setSelectedButton] = useState("");
@@ -20,7 +20,7 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
                 setVotes(articleFromApi.votes)
                 getUserByUsername(articleFromApi.author)
                     .then((author) => {
-                        setAuthor(author);
+                        setArticleAuthor(author);
                         setIsLoading(false);
                     })
             })
@@ -77,18 +77,20 @@ function SingleArticle({ isLoading, setIsLoading, userVotes, setUserVotes }) {
         )
     }
 
+    const { title, article_img_url, author, topic, created_at, body } = singleArticle;
+
     return (
         <section>
             <article className="single-article">
-                <h2>{singleArticle.title}</h2>
+                <h2>{title}</h2>
                 <div className="single-article-details">
-                    <img id="author-avatar" src={author.avatar_url} alt={singleArticle.author} />
-                    <p>{singleArticle.author}</p>
-                    <p className="topic-label">{singleArticle.topic}</p>
-                    <p>{singleArticle.created_at}</p>
+                    <img id="author-avatar" src={articleAuthor.avatar_url} alt={author} />
+                    <p>{author}</p>
+                    <p className="topic-label">{topic}</p>
+                    <p>{created_at}</p>
                 </div>
-                <img src={singleArticle.article_img_url} alt={singleArticle.title} />
-                <p className="article-body">{singleArticle.body}</p>
+                <img src={article_img_url} alt={title} />
+                <p className="article-body">{body}</p>
                 <section className="votes">
                     <p>❤️ Votes: {votes}</p>
                     <button 
