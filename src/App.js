@@ -8,14 +8,15 @@ import SingleArticle from './components/SingleArticle';
 
 function App() {
   const [isLoading, setIsLoading] = useState();
+  const [userVoteRecord, setUserVoteRecord] = useState({});
 
   return (
     <div className="App">
-      <Nav/>
+      <Nav setUserVoteRecord={setUserVoteRecord}/>
       <Header/>
       <Routes>
         <Route path='/' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
-        <Route path='/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
+        <Route path='/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading} userVoteRecord={userVoteRecord} setUserVoteRecord={setUserVoteRecord}/>}></Route>
       </Routes>
     </div>
   );

@@ -1,19 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
 import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
-import { useContext } from 'react';
 import Comments from "./Comments";
 
-function SingleArticle({ isLoading, setIsLoading }) {
+function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRecord }) {
     const { article_id } = useParams();
-    const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
+    const { loggedInUser } = useContext(LoggedInUserContext);
     const [singleArticle, setSingleArticle] = useState({});
     const [articleAuthor, setArticleAuthor] = useState({});
     const [votes, setVotes] = useState();
     const [voteError, setVoteError] = useState("");
-    const [selectedButton, setSelectedButton] = useState("");
 
     useEffect(() => {
         setIsLoading(true)
@@ -30,8 +27,11 @@ function SingleArticle({ isLoading, setIsLoading }) {
     }, [article_id, setIsLoading])
 
     const updateVoteNum = (e) => {
+        if (loggedInUser.username === "none") {
+            setVoteError("You must be logged in to vote");
+            return;
+        }
         const newVotes = +e.target.value;
-        setSelectedButton(e.target.value);
         setVoteError("");
         setVotes((currVote) => {
             return currVote + newVotes;
@@ -41,12 +41,11 @@ function SingleArticle({ isLoading, setIsLoading }) {
                 return currVote - newVotes;
             })
             setVoteError("Oops - something went wrong!");
-            setSelectedButton("");
         })
-        setLoggedInUser((currLoggedInUser) => {
+        setUserVoteRecord((currUserVotes) => {
             return {
-                ...currLoggedInUser,
-                votes: {[article_id]: e.target.value}
+                ...currUserVotes,
+                [article_id]: e.target.value
             }
         })
     }
@@ -55,7 +54,6 @@ function SingleArticle({ isLoading, setIsLoading }) {
         const newVotes = +e.target.value;
         const inverseNum = newVotes * -1;
         setVoteError("");
-        setSelectedButton("");
         setVotes((currVote) => {
             return currVote + inverseNum;
         })
@@ -64,12 +62,11 @@ function SingleArticle({ isLoading, setIsLoading }) {
                 return currVote - inverseNum;
             })
             setVoteError("Oops - something went wrong!")
-            setSelectedButton(e.target.value);
         })
-        setLoggedInUser((currLoggedInUser) => {
+        setUserVoteRecord((currUserVotes) => {
             return {
-                ...currLoggedInUser,
-                votes: {[article_id]: ""}
+                ...currUserVotes,
+                [article_id]: ""
             }
         })
     }
@@ -97,15 +94,15 @@ function SingleArticle({ isLoading, setIsLoading }) {
                 <section className="votes">
                     <p>❤️ Votes: {votes}</p>
                     <button 
-                        onClick={loggedInUser.votes[article_id] === "1" ? undoVote : updateVoteNum} 
-                        disabled={loggedInUser.votes[article_id] === "-1"} 
+                        onClick={userVoteRecord[article_id] === "1" ? undoVote : updateVoteNum} 
+                        disabled={userVoteRecord[article_id] === "-1"} 
                         value="1" 
-                        className={selectedButton === "1" ? "selected-vote-button" : ""} >❤️ +1</button>
+                        className={userVoteRecord[article_id] === "1" ? "selected-vote-button" : ""} >❤️ +1</button>
                     <button 
-                        onClick={loggedInUser.votes[article_id] === "-1" ? undoVote : updateVoteNum} 
-                        disabled={loggedInUser.votes[article_id] === "1"} 
+                        onClick={userVoteRecord[article_id] === "-1" ? undoVote : updateVoteNum} 
+                        disabled={userVoteRecord[article_id] === "1"} 
                         value="-1" 
-                        className={selectedButton === "-1" ? "selected-vote-button" : ""} >👎 -1</button>
+                        className={userVoteRecord[article_id] === "-1" ? "selected-vote-button" : ""} >👎 -1</button>
                 </section>
                 <p id="vote-error">{voteError}</p>
                 <br></br>

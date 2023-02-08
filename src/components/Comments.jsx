@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCommentsByArticleId } from "../utils/api";
+import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 import CommentCard from "./CommentCard";
 import CommentPoster from "./CommentPoster";
 
 function Comments() {
     const { article_id } = useParams();
+    const { loggedInUser } = useContext(LoggedInUserContext);
     const [comments, setComments] = useState([]);
     const [commentsLoading, setCommentsLoading] = useState();
 
@@ -17,7 +18,7 @@ function Comments() {
                 setComments(commentsFromApi);
                 setCommentsLoading(false);
             })
-    }, [article_id])
+    }, [article_id, loggedInUser])
 
     if (commentsLoading) {
         return (

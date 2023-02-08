@@ -24,6 +24,10 @@ function CommentPoster({setComments}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setPosting("posting");
+        if (loggedInUser.username === "none") {
+            setPosting("loggedout");
+            return;
+        }
         setComments((currComments) => {
             return [{
                 "comment_id": "tbc",
@@ -67,7 +71,8 @@ function CommentPoster({setComments}) {
         </form>
         {posting === "posting" ? <p className="feedback">Posting...</p> : 
         posting === "posted" ? <p className="feedback">Your comment has been posted!</p> :
-        posting === "error" ? <p className="feedback">Oops - something went wrong!</p> : ""}
+        posting === "error" ? <p className="feedback">Oops - something went wrong!</p> :
+        posting === "loggedout" ? <p className="feedback">You must be logged in to post</p> : ""}
         </section>
     );
 }
