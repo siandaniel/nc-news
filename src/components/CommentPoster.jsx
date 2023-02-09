@@ -56,7 +56,7 @@ function CommentPoster({setComments}) {
             })
     }
 
-    return (
+    return ( 
         <section>
         <form onSubmit={handleSubmit} className="comment-poster">
             <label htmlFor="new-comment">Post a new comment:</label>
