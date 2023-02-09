@@ -2,8 +2,10 @@ import axios from "axios";
 
 const ncNewsApi = axios.create({ baseURL: "https://nc-news-5aio.onrender.com/api" })
 
-export const getArticles = () => {
-    return ncNewsApi.get(`/articles`)
+export const getArticles = (query) => {
+    let apiQuery = `/articles${query}`
+    
+    return ncNewsApi.get(apiQuery)
         .then(({data}) => {
             return data.articles;
         })

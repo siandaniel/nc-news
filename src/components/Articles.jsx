@@ -6,15 +6,21 @@ import MostRecent from "./MostRecent";
 function Articles({isLoading, setIsLoading}) {
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
+    const [query, setQuery] = useState("?sort_by=created_at&order=desc");
 
     useEffect(() => {
         setIsLoading(true);
-        getArticles().then((articlesFromApi) => {
+        getArticles(query).then((articlesFromApi) => {
           setArticles(articlesFromApi);
           setMostRecent(articlesFromApi[0]);
           setIsLoading(false);
         })
-      }, [setIsLoading])
+      }, [setIsLoading, query])
+
+      const handleQuery = (e) => {
+        e.preventDefault();
+        setQuery(e.target.value);
+      }
 
     if (isLoading) {
         return (
@@ -28,13 +34,14 @@ function Articles({isLoading, setIsLoading}) {
       <section className="articles-section">
         <form id="sort-by-form">
           <label htmlFor="sort-by">Sort by: </label>
-          <select id="sort-by">
-            <option>Date (newest to oldest)</option>
-            <option>Date (oldest to newest)</option>
-            <option>Comment Count (most to least)</option>
-            <option>Comment Count (least to most)</option>
-            <option>Votes (most to least)</option>
-            <option>Votes (least to most)</option>
+          <select onChange={handleQuery} id="sort-by">
+            <option>Choose</option>
+            <option value="?sort_by=created_at&order=desc">Date: Newest first</option>
+            <option value="?sort_by=created_at&order=asc">Date: Oldest first</option>
+            <option value="?sort_by=comment_count&order=desc">Comment Count: Most first</option>
+            <option value="?sort_by=comment_count&order=asc">Comment Count: Least first</option>
+            <option value="?sort_by=votes&order=desc">Votes: Most first</option>
+            <option value="?sort_by=votes&order=asc">Votes: Least first</option>
           </select>
         </form>
         <MostRecent mostRecent={mostRecent}/>
