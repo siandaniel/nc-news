@@ -72,6 +72,29 @@ body {
   background-color: rgb(155, 111, 200);
 }
 
+nav p {
+  margin: auto 10px;
+}
+
+nav img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+nav button {
+  margin: 0 10px 0 10px;
+  width: 60px;
+  height: 20px;
+  font-size: 0.7rem;
+}
+
+#logged-in-user {
+  display: flex;
+  margin-right: 10px;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;

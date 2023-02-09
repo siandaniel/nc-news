@@ -8,7 +8,7 @@ function CommentCard({comment}) {
             <br></br>
             <p>Votes: {comment.votes}</p>
         </article>
-    );
+   );
 }
 
 export default CommentCard;
