@@ -3,16 +3,14 @@ import { useState, useEffect, useContext } from "react";
 import { getTopics } from "../utils/api";
 import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 
-function Nav({setUserVoteRecord}) {
+function Nav({ setUserVoteRecord }) {
   const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
   const [signedIn, setSignedIn] = useState(false);
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    // setIsLoading(true);
     getTopics().then((topicsFromApi) => {
       setTopics(topicsFromApi);
-      // setIsLoading(false);
     })
   }, [])
 
@@ -23,7 +21,7 @@ function Nav({setUserVoteRecord}) {
       "name": "Jess Jelly",
       "avatar_url": "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
       "votes": {}
-  })
+    })
     setUserVoteRecord({});
   }
 
@@ -34,18 +32,25 @@ function Nav({setUserVoteRecord}) {
       "name": "none",
       "avatar_url": "none",
       "votes": {}
-  })
+    })
     setUserVoteRecord({});
   }
 
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">Home</Link>
-      {topics.map((topic) => {
+      <div className="dropdown">
+        <button className="dropbtn">Topics
+          <i className="fa fa-caret-down"></i>
+        </button>
+        <div className="dropdown-content">
+          {topics.map((topic) => {
             return <Link to={`/articles/${topic.slug}`} key={topic.slug}>{topic.slug}</Link>
           })}
+        </div>
+      </div>
       <div id="logged-in-user">
-        {signedIn ? <p>Hello <b>{loggedInUser.username}</b>!</p> : ""}
+        {signedIn ? <p>Hi <b>{loggedInUser.username}</b>!</p> : ""}
         {signedIn ? <img src={loggedInUser.avatar_url} alt={`Avatar for ${loggedInUser.username}`} /> : ""}
         <button onClick={signedIn ? handleLogout : handleLogin}>{signedIn ? "Log Out" : "Log In"}</button>
       </div>
