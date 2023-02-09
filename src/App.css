@@ -203,6 +203,18 @@ h3 {
   margin-bottom: 5vh;
 }
 
+#sort-by-form {
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  width: fit-content;
+  height: fit-content;
+}
+
+#sort-by {
+  height: fit-content;
+}
+
 .articles-container {
   box-sizing: content-box;
   width: 85vw;

@@ -8,15 +8,25 @@ function Articles({isLoading, setIsLoading}) {
     const { topic } = useParams();
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
+    const [query, setQuery] = useState("?sort_by=created_at&order=desc");
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
+        setErrorMessage("");
         setIsLoading(true);
-        getArticles(topic).then((articlesFromApi) => {
+        getArticles(topic, query).then((articlesFromApi) => {
           setArticles(articlesFromApi);
           setMostRecent(articlesFromApi[0]);
           setIsLoading(false);
+        }).catch((err) => {
+          setErrorMessage("Oops, something went wrong loading the articles! Please try again.")
         })
-      }, [setIsLoading, topic])
+      }, [setIsLoading, topic, query])
+
+      const handleQuery = (e) => {
+        e.preventDefault();
+        setQuery(e.target.value);
+      }
 
     if (isLoading) {
         return (
@@ -24,11 +34,26 @@ function Articles({isLoading, setIsLoading}) {
         )
     }
 
+    if (errorMessage !== "") {
+      return <p>{errorMessage}</p>
+    }
+
     else {
 
     return (
       <section className="articles-section">
-        <MostRecent mostRecent={mostRecent}/>
+        <form id="sort-by-form">
+          <label htmlFor="sort-by">Sort by: </label>
+          <select onChange={handleQuery} id="sort-by" value={query}>
+            <option value="?sort_by=created_at&order=desc">Date: Newest first</option>
+            <option value="?sort_by=created_at&order=asc">Date: Oldest first</option>
+            <option value="?sort_by=comment_count&order=desc">Comment Count: Most first</option>
+            <option value="?sort_by=comment_count&order=asc">Comment Count: Least first</option>
+            <option value="?sort_by=votes&order=desc">Votes: Most first</option>
+            <option value="?sort_by=votes&order=asc">Votes: Least first</option>
+          </select>
+        </form>
+        <MostRecent mostRecent={mostRecent} query={query} topic={topic}/>
         <section className="articles-container">
         {articles.map((article, index) => {
             return index === 0 ? "" : <ArticleCard article={article} key={article.article_id}/>
