@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import MostRecent from "./MostRecent";
 
 function Articles({isLoading, setIsLoading}) {
+    const { topic } = useParams();
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
 
     useEffect(() => {
         setIsLoading(true);
-        getArticles().then((articlesFromApi) => {
+        getArticles(topic).then((articlesFromApi) => {
           setArticles(articlesFromApi);
           setMostRecent(articlesFromApi[0]);
           setIsLoading(false);
         })
-      }, [setIsLoading])
+      }, [setIsLoading, topic])
 
     if (isLoading) {
         return (
