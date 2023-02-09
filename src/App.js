@@ -16,6 +16,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
+        <Route path='/articles/:topic' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
         <Route path='/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading} userVoteRecord={userVoteRecord} setUserVoteRecord={setUserVoteRecord}/>}></Route>
       </Routes>
     </div>

@@ -2,9 +2,11 @@ import axios from "axios";
 
 const ncNewsApi = axios.create({ baseURL: "https://nc-news-5aio.onrender.com/api" })
 
-export const getArticles = (query) => {
+ 
+export const getArticles = (topic, query) => {
     let apiQuery = `/articles${query}`
-    
+    if (topic) queryString+= `&topic=${topic}`
+
     return ncNewsApi.get(apiQuery)
         .then(({data}) => {
             return data.articles;
@@ -40,6 +42,13 @@ export const updateVotes = (article_id, number) => {
         .then(({data}) => {
             return data.updatedArticle;
         })
+}
+
+export const getTopics = () => {
+    return ncNewsApi.get(`/topics`)
+    .then(({data}) => {
+        return data.topics;
+    })
 }
 
 export const postComment = (article_id, newComment) => {
