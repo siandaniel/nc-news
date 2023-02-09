@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCommentsByArticleId } from "../utils/api";
+import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 import CommentCard from "./CommentCard";
 import CommentPoster from "./CommentPoster";
 
 function Comments() {
     const { article_id } = useParams();
+    const { loggedInUser } = useContext(LoggedInUserContext);
     const [comments, setComments] = useState([]);
     const [commentsLoading, setCommentsLoading] = useState();
 
@@ -17,7 +18,7 @@ function Comments() {
                 setComments(commentsFromApi);
                 setCommentsLoading(false);
             })
-    }, [article_id])
+    }, [article_id, loggedInUser])
 
     if (commentsLoading) {
         return (
@@ -33,7 +34,7 @@ function Comments() {
             <h3>Comments</h3>
             {comments.length === 0 ? <p><b>There are no comments on this article yet. </b><em>Want to be the first to post?</em></p>: "" }
             {comments.length === 0 ? <br></br> : "" }
-            <CommentPoster/>
+            <CommentPoster setComments={setComments}/>
             <section className="comments-container">
                 {comments.map((comment) => {
                     return <CommentCard comment={comment} key={comment.comment_id} />
