@@ -21,22 +21,97 @@ body {
 
 /* NAV and HEADERS */
 
-nav {
+.navbar {
+  overflow: hidden;
   background-color: azure;
-  width: 100%;
-  height: 5vh;
+  font-family: Arial;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: rgb(29, 1, 87);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  outline: none;
+  color: rgb(29, 1, 87);
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0; 
+}
+
+#logged-in-user {
   display: flex;
-  align-content: center;
-  justify-content: left;
+  margin: 0;
+  float: right;
+  font-size: 16px;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-nav a {
-  margin: auto 30px;
+#logged-in-user p {
+  margin-right: 5px;
 }
 
-nav p {
-  margin: auto 30px;
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(155, 111, 200);
 }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddc0d3;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+nav img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+nav button {
+  margin: 0 10px 0 10px;
+  width: 60px;
+  height: 20px;
+  font-size: 0.7rem;
+}
+
 
 h1 {
   font-size: 4.5rem;
@@ -244,13 +319,20 @@ img {
 }
 
 .comment-poster {
-  margin: auto auto 5vh auto;
+  margin: auto auto 1vh auto;
 }
 
 form {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   padding: 0 2vw;
+  margin: 0 auto;
+}
+
+.feedback {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(32, 135, 169);
 }
 
 textarea {
@@ -279,6 +361,10 @@ button {
 }
 
 @media (min-width: 750px) {
+
+  nav {
+    height: 50px;
+  }
 
   .articles-container {
     display: flex;
@@ -314,7 +400,7 @@ button {
   }
 
   .comment-poster {
-    margin: auto auto 3vh auto;
+    margin: auto auto 1vh auto;
   }
   
   form {
