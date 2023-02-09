@@ -26,6 +26,17 @@ function Articles({isLoading, setIsLoading}) {
 
     return (
       <section className="articles-section">
+        <form id="sort-by-form">
+          <label htmlFor="sort-by">Sort by: </label>
+          <select id="sort-by">
+            <option>Date (newest to oldest)</option>
+            <option>Date (oldest to newest)</option>
+            <option>Comment Count (most to least)</option>
+            <option>Comment Count (least to most)</option>
+            <option>Votes (most to least)</option>
+            <option>Votes (least to most)</option>
+          </select>
+        </form>
         <MostRecent mostRecent={mostRecent}/>
         <section className="articles-container">
         {articles.map((article, index) => {
