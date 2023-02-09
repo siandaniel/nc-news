@@ -11,6 +11,7 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
     const [articleAuthor, setArticleAuthor] = useState({});
     const [votes, setVotes] = useState();
     const [voteError, setVoteError] = useState("");
+    const { title, article_img_url, author, topic, created_at, body } = singleArticle;
 
     useEffect(() => {
         setIsLoading(true)
@@ -76,8 +77,6 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
             <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img" />
         )
     }
-
-    const { title, article_img_url, author, topic, created_at, body } = singleArticle;
 
     return (
         <section>

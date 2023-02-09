@@ -55,3 +55,8 @@ export const postComment = (article_id, newComment) => {
             return data.commentPosted;
         })
 }
+
+export const deleteComment = (comment_id) => {
+    console.log("ready to delete comment", comment_id)
+    return ncNewsApi.delete(`/comments/${comment_id}`)
+}

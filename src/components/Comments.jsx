@@ -37,7 +37,7 @@ function Comments() {
             <CommentPoster setComments={setComments}/>
             <section className="comments-container">
                 {comments.map((comment) => {
-                    return <CommentCard comment={comment} key={comment.comment_id} />
+                    return <CommentCard comment={comment} key={comment.comment_id} setComments={setComments} />
                 })}
             </section>
         </section>
