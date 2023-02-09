@@ -34,8 +34,7 @@ function Articles({isLoading, setIsLoading}) {
       <section className="articles-section">
         <form id="sort-by-form">
           <label htmlFor="sort-by">Sort by: </label>
-          <select onChange={handleQuery} id="sort-by">
-            <option>Choose</option>
+          <select onChange={handleQuery} id="sort-by" value={query}>
             <option value="?sort_by=created_at&order=desc">Date: Newest first</option>
             <option value="?sort_by=created_at&order=asc">Date: Oldest first</option>
             <option value="?sort_by=comment_count&order=desc">Comment Count: Most first</option>
@@ -44,7 +43,7 @@ function Articles({isLoading, setIsLoading}) {
             <option value="?sort_by=votes&order=asc">Votes: Least first</option>
           </select>
         </form>
-        <MostRecent mostRecent={mostRecent}/>
+        <MostRecent mostRecent={mostRecent} query={query}/>
         <section className="articles-container">
         {articles.map((article, index) => {
             return index === 0 ? "" : <ArticleCard article={article} key={article.article_id}/>
