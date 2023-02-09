@@ -9,13 +9,17 @@ function Articles({isLoading, setIsLoading}) {
     const [articles, setArticles] = useState([]);
     const [mostRecent, setMostRecent] = useState({});
     const [query, setQuery] = useState("?sort_by=created_at&order=desc");
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
+        setErrorMessage("");
         setIsLoading(true);
         getArticles(topic, query).then((articlesFromApi) => {
           setArticles(articlesFromApi);
           setMostRecent(articlesFromApi[0]);
           setIsLoading(false);
+        }).catch((err) => {
+          setErrorMessage("Oops, something went wrong loading the articles! Please try again.")
         })
       }, [setIsLoading, topic, query])
 
@@ -28,6 +32,10 @@ function Articles({isLoading, setIsLoading}) {
         return (
             <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img"/>
         )
+    }
+
+    if (errorMessage !== "") {
+      return <p>{errorMessage}</p>
     }
 
     else {
@@ -45,7 +53,7 @@ function Articles({isLoading, setIsLoading}) {
             <option value="?sort_by=votes&order=asc">Votes: Least first</option>
           </select>
         </form>
-        <MostRecent mostRecent={mostRecent} query={query}/>
+        <MostRecent mostRecent={mostRecent} query={query} topic={topic}/>
         <section className="articles-container">
         {articles.map((article, index) => {
             return index === 0 ? "" : <ArticleCard article={article} key={article.article_id}/>
