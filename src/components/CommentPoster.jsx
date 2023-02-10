@@ -34,7 +34,7 @@ function CommentPoster({setComments, posting, setPosting, newCommentId, setNewCo
                 "article_id": article_id,
                 "author": loggedInUser.username,
                 "votes": 0,
-                "created_at": "Just now"
+                "created_at": new Date().toISOString()
             }, ...currComments]
         })
         postComment(article_id, newComment)
