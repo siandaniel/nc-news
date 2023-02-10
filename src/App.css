@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Posterman';
+  src: url('./fonts/Posterman.otf') format('opentype');
+}
+
 /* MAIN */
 
 * {
@@ -66,7 +71,7 @@ body {
   border: none;
   outline: none;
   color: rgb(29, 1, 87);
-  padding: 14px 16px;
+  padding: 14px 14px;
   background-color: inherit;
   font-family: inherit;
   margin: 0; 
@@ -78,8 +83,9 @@ body {
   float: right;
   font-size: 16px;
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 5px;
   text-decoration: none;
+  margin-right: 10px;
 }
 
 #logged-in-user p {
@@ -106,11 +112,6 @@ nav button {
   width: 60px;
   height: 20px;
   font-size: 0.7rem;
-}
-
-#logged-in-user {
-  display: flex;
-  margin-right: 10px;
 }
 
 .dropdown-content {
@@ -155,8 +156,12 @@ nav button {
 
 
 h1 {
-  font-size: 4.5rem;
-  margin: 2vh 2vw;
+  font-family: 'Posterman';
+  color:rgb(0, 0, 72);
+  text-shadow: 10px 10px 10px rgb(203, 185, 227);
+  font-size: 6rem;
+  margin: 0vh 2vw;
+  font-weight: lighter;
 }
 
 h2 {
@@ -224,7 +229,7 @@ h3 {
 #sort-by-form {
   display: block;
   padding: 0;
-  margin: 0 auto;
+  margin: 20px auto;
   width: fit-content;
   height: fit-content;
 }
