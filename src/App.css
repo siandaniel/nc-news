@@ -331,6 +331,7 @@ img {
   font-size: 10pt;
   font-weight: bold;
   text-align: right;
+  color: rgb(32, 135, 169);
 }
 
 
@@ -393,6 +394,10 @@ button {
 #comment-loading img {
   height: 50px;
   width: 50px;
+}
+
+.comment-card .feedback {
+  margin-top: 10px;
 }
 
 @media (min-width: 750px) {

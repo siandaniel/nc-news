@@ -4,40 +4,34 @@ import { deleteComment } from "../utils/api.js";
 
 function CommentCard({comment, setComments}) {
     const { loggedInUser } = useContext(LoggedInUserContext);
-    const [deleteStatus, setDeleteStatus] = useState("");
+    const [deleteStatus, setDeleteStatus] = useState(false);
+    const [deleteMessage, setDeleteMessage] = useState("");
 
     const handleDelete = (comment_id) => {
-        setDeleteStatus("loading")
-        setTimeout(5000)
-            setComments((currComments) => {
-                return currComments.filter((currComment) => {
-                    return currComment.comment_id !== comment_id
-                })
-            })
-        deleteComment(comment_id)
-        .then(() => {
-            setDeleteStatus("");
-        })
-        .catch((err) => {
-            setComments((currComments) => {
-                return [comment, ...currComments]
-            })
-            setDeleteStatus("error");
+        setDeleteMessage("Deleting...")
+        setDeleteStatus(true);
+        deleteComment(comment_id).then(() => {
+            setDeleteMessage("Your comment has been deleted.")
+        }).catch((err) => {
+            setDeleteStatus(false);
+            setDeleteMessage("Something went wrong deleting this comment")
         })
     }
 
     return (
         <article className="comment-card">
-            <h4>{comment.author} </h4>
-            <p>{comment.created_at}</p>
-            <br></br>
-            <p>{comment.body}</p>
-            <br></br>
-            <p>Votes: {comment.votes}</p>
-            <button onClick={(e) => {handleDelete(comment.comment_id)}} hidden={loggedInUser.username !== comment.author}>Delete</button>
-            <p>{deleteStatus === "loading" ? "Deleting" : 
-                deleteStatus === "error" ? "Oops - something went wrong!" : "" }</p>
-        </article>
+        { deleteStatus ? <p className="feedback">{deleteMessage}</p> :   
+            <div>
+        <h4>{comment.author} </h4>
+        <p>{comment.created_at}</p>
+        <br></br>
+        <p>{comment.body}</p>
+        <br></br>
+        <p>Votes: {comment.votes}</p>
+        <button onClick={() => {handleDelete(comment.comment_id)}} hidden={loggedInUser.username !== comment.author}>Delete</button> 
+        <p className="feedback">{deleteMessage}</p>
+        </div>}
+    </article>
    );
 }
 
