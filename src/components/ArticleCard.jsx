@@ -5,7 +5,7 @@ function ArticleCard({article}) {
         <article className="article-card">
         <section className="article-details">
             <Link to={`/articles/article/${article.article_id}`} className="article-link"><h3>{article.title}</h3></Link>
-            <p className="topic-label">{article.topic}</p>
+            <p className={`topic-label-${['football', 'coding', 'cooking'].includes(article.topic) ? article.topic : "other"}`}><Link to={`/articles/${article.topic}`}>{article.topic}</Link></p>
             <p>{article.author} </p>
             <p>Votes: {article.votes}</p>
         </section>

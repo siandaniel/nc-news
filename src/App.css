@@ -206,9 +206,31 @@ h3 {
   grid-area: "header";
 }
 
-.recent-topic {
+.most-recent-details a {
+  text-decoration: none;
+}
+
+.rec-topic-label-other {
   grid-area: "topic";
   background-color: rgb(181, 178, 178);
+  width: fit-content;
+}
+
+.rec-topic-label-football {
+  grid-area: "topic";
+  background-color: rgb(241, 195, 195);
+  width: fit-content;
+}
+
+.rec-topic-label-coding {
+  grid-area: "topic";
+  background-color: rgb(154, 187, 222);
+  width: fit-content;
+}
+
+.rec-topic-label-cooking {
+  grid-area: "topic";
+  background-color: rgb(173, 219, 162);
   width: fit-content;
 }
 
@@ -269,11 +291,31 @@ h3 {
   margin: 1vh 2vw;
 }
 
-.topic-label {
+.topic-label-football {
+  background-color: rgb(241, 195, 195);
+  width: fit-content;
+  text-align: left;
+  margin: auto 0 auto auto;
+}
+
+.topic-label-coding {
+  background-color: rgb(154, 187, 222);
+  width: fit-content;
+  margin: auto 0 auto auto;
+}
+
+.topic-label-cooking {
+  background-color: rgb(173, 219, 162);
+  width: fit-content;
+  margin: auto 0 auto auto;
+}
+
+.topic-label-other {
   background-color: rgb(181, 178, 178);
   width: fit-content;
   margin: auto 0 auto auto;
 }
+
 
 img {
   width: 90%;
@@ -283,6 +325,11 @@ img {
 #loading-img {
   max-width: 80vw;
 }
+
+.article-details p a {
+  text-decoration: none;
+}
+
 
 /* SINGLE ARTICLE */
 
@@ -308,7 +355,19 @@ img {
   align-items: center;
 }
 
-.single-article .topic-label {
+.single-article .topic-label-football {
+  margin: 0 2vw;
+}
+
+.single-article .topic-label-coding {
+  margin: 0 2vw;
+}
+
+.single-article .topic-label-cooking {
+  margin: 0 2vw;
+}
+
+.single-article .topic-label-other {
   margin: 0 2vw;
 }
 
@@ -355,6 +414,10 @@ img {
   font-weight: bold;
   text-align: right;
   color: rgb(32, 135, 169);
+}
+
+.single-article-details a {
+  text-decoration: none;
 }
 
 

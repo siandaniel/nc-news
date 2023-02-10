@@ -12,7 +12,7 @@ function MostRecent({mostRecent, query, topic}) {
         <Link to={`/articles/article/${mostRecent.article_id}`} className="article-link"><img src={mostRecent.article_img_url} id="most-recent-img" alt={mostRecent.title}/></Link>
         <Link to={`/articles/article/${mostRecent.article_id}`} className="article-link"><h3 className="recent-header">{mostRecent.title}</h3></Link>
         <section className="most-recent-details">
-            <p className="recent-topic">{mostRecent.topic}</p>
+            <p className={`rec-topic-label-${['football', 'coding', 'cooking'].includes(mostRecent.topic) ? mostRecent.topic : "other"}`}><Link to={`/articles/${mostRecent.topic}`}>{mostRecent.topic}</Link></p>
             <p className="recent-author">{mostRecent.author} </p>
             <p className="recent-votes">Votes: {mostRecent.votes}</p>
         </section>

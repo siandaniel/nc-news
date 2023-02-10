@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
 import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
@@ -96,7 +96,7 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
                 <div className="single-article-details">
                     <img id="author-avatar" src={articleAuthor.avatar_url} alt={author} />
                     <p>{author}</p>
-                    <p className="topic-label">{topic}</p>
+                    <p className={`topic-label-${['football', 'coding', 'cooking'].includes(topic) ? topic : "other"}`}><Link to={`/articles/${topic}`}>{topic}</Link></p>
                     <p>{created_at}</p>
                 </div>
                 <img src={article_img_url} alt={title} />
