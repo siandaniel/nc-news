@@ -3,42 +3,44 @@ import { useParams } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import MostRecent from "./MostRecent";
+import ErrorPage from "./ErrorPage";
 
-function Articles({isLoading, setIsLoading, setError}) {
-    const { topic } = useParams();
-    const [articles, setArticles] = useState([]);
-    const [mostRecent, setMostRecent] = useState({});
-    const [query, setQuery] = useState("?sort_by=created_at&order=desc");
-    const [errorMessage, setErrorMessage] = useState("");
+function Articles({ isLoading, setIsLoading, error, setError }) {
+  const { topic } = useParams();
+  const [articles, setArticles] = useState([]);
+  const [mostRecent, setMostRecent] = useState({});
+  const [query, setQuery] = useState("?sort_by=created_at&order=desc");
 
-    useEffect(() => {
-        setErrorMessage("");
-        setIsLoading(true);
-        getArticles(topic, query).then((articlesFromApi) => {
-          setArticles(articlesFromApi);
-          setMostRecent(articlesFromApi[0]);
-          setIsLoading(false);
-        }).catch((err) => {
-          setErrorMessage("Oops, something went wrong loading the articles! Please try again.")
-        })
-      }, [setIsLoading, topic, query])
+  useEffect(() => {
+    setError(null)
+    setIsLoading(true);
+    getArticles(topic, query).then((articlesFromApi) => {
+      setArticles(articlesFromApi);
+      setMostRecent(articlesFromApi[0]);
+      setIsLoading(false);
+    }).catch((err) => {
+      if (err.code === "ERR_BAD_REQUEST")
+        setIsLoading(false)
+      setError("Sorry, this topic does not exist")
+    })
+  }, [setIsLoading, setError, topic, query])
 
-      const handleQuery = (e) => {
-        e.preventDefault();
-        setQuery(e.target.value);
-      }
+  const handleQuery = (e) => {
+    e.preventDefault();
+    setQuery(e.target.value);
+  }
 
-    if (isLoading) {
-        return (
-            <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img"/>
-        )
-    }
+  if (isLoading) {
+    return (
+      <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img" />
+    )
+  }
 
-    if (errorMessage !== "") {
-      return <p>{errorMessage}</p>
-    }
+  if (error) {
+    return <ErrorPage error={error} />
+  }
 
-    else {
+  else {
 
     return (
       <section className="articles-section">
@@ -53,16 +55,16 @@ function Articles({isLoading, setIsLoading, setError}) {
             <option value="?sort_by=votes&order=asc">Votes: Least first</option>
           </select>
         </form>
-        <MostRecent mostRecent={mostRecent} query={query} topic={topic}/>
+        <MostRecent mostRecent={mostRecent} query={query} topic={topic} />
         <section className="articles-container">
-        {articles.map((article, index) => {
-            return index === 0 ? "" : <ArticleCard article={article} key={article.article_id}/>
-        })}
+          {articles.map((article, index) => {
+            return index === 0 ? "" : <ArticleCard article={article} key={article.article_id} />
+          })}
         </section>
       </section>
     );
 
-    }
+  }
 }
 
 export default Articles;

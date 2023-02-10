@@ -18,9 +18,9 @@ function App() {
       <Header/>
       <Routes>
         <Route path="*" element={<ErrorPage error={"Sorry, this page does not exist"}/>} />
-        <Route path='/' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} setError={setError}/>}></Route>
+        <Route path='/' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
         <Route path='/articles' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
-        <Route path='/articles/:topic' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
+        <Route path='/articles/:topic' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} error={error} setError={setError}/>}></Route>
         <Route path='/articles/article/:article_id' element={<SingleArticle isLoading={isLoading} setIsLoading={setIsLoading} userVoteRecord={userVoteRecord} setUserVoteRecord={setUserVoteRecord} error={error} setError={setError}/>}></Route>
       </Routes>
     </div>
