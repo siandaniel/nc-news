@@ -39,7 +39,7 @@ function Comments() {
             <CommentPoster setComments={setComments} posting={posting} setPosting={setPosting} newCommentId={newCommentId} setNewCommentId={setNewCommentId}/>
             <section className="comments-container">
                 {comments.map((comment) => {
-                    return <CommentCard comment={comment} setPosting={setPosting} newCommentId={newCommentId} key={comment.comment_id} setComments={setComments} />
+                    return <CommentCard comment={comment} setPosting={setPosting} newCommentId={newCommentId} key={comment.comment_id === "tbc" ? newCommentId : comment.comment_id} setComments={setComments} />
                 })}
             </section>
         </section>
