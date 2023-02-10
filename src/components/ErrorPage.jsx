@@ -1,8 +1,9 @@
-function ErrorPage() {
+function ErrorPage({error}) {
     return (
-      <header>
-        <h3>This page does not exist</h3>
-      </header>
+      <section className="error-page">
+        <img src="https://media.tenor.com/fd-UxMnAN9oAAAAC/taylor-swift-im-sorry.gif" alt="sad Taylor Swift with sorry sign"/>
+        <h3>{error}</h3>
+      </section>
     );
 }
 

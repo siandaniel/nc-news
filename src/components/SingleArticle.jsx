@@ -3,8 +3,9 @@ import { useState, useEffect, useContext } from "react";
 import { getArticleById, getUserByUsername, updateVotes } from "../utils/api";
 import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 import Comments from "./Comments";
+import ErrorPage from "./ErrorPage";
 
-function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRecord }) {
+function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRecord, setError, error }) {
     const { article_id } = useParams();
     const { loggedInUser } = useContext(LoggedInUserContext);
     const [singleArticle, setSingleArticle] = useState({});
@@ -13,6 +14,7 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
     const [voteError, setVoteError] = useState("");
 
     useEffect(() => {
+        setError(null)
         setIsLoading(true)
         getArticleById(article_id)
             .then((articleFromApi) => {
@@ -24,7 +26,12 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
                         setIsLoading(false);
                     })
             })
-    }, [article_id, setIsLoading])
+            .catch((err) => {
+                if (err.code === "ERR_BAD_REQUEST")
+                setIsLoading(false)
+                setError("Sorry, this article does not exist")
+            })
+    }, [article_id, setIsLoading, setError])
 
     const updateVoteNum = (e) => {
         if (loggedInUser.username === "none") {
@@ -75,6 +82,10 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
         return (
             <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" alt="loading" id="loading-img" />
         )
+    }
+
+    if (error) {
+        return <ErrorPage error={error}/>
     }
 
     const { title, article_img_url, author, topic, created_at, body } = singleArticle;

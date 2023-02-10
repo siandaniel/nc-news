@@ -19,6 +19,24 @@ body {
   padding-bottom: 3vh;
 }
 
+/* ERROR PAGE */
+
+.error-page {
+  margin: 0 auto;
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-page img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
 /* NAV and HEADERS */
 
 .navbar {
