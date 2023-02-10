@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../utils/api";
 import { LoggedInUserContext } from '../contexts/LoggedInUserContext.js';
 
-function CommentPoster({setComments}) {
+function CommentPoster({setComments, posting, setPosting, newCommentId, setNewCommentId}) {
     const { article_id } = useParams();
     const { loggedInUser } = useContext(LoggedInUserContext);
     const [newComment, setNewComment] = useState({
         "body": "",
         "username": loggedInUser.username
     })
-    const [posting, setPosting] = useState("");
 
     const onChange = (e) => {
         setNewComment((currNewComment) => {
@@ -35,7 +34,7 @@ function CommentPoster({setComments}) {
                 "article_id": article_id,
                 "author": loggedInUser.username,
                 "votes": 0,
-                "created_at": "Just now"
+                "created_at": new Date().toISOString()
             }, ...currComments]
         })
         postComment(article_id, newComment)
@@ -45,6 +44,7 @@ function CommentPoster({setComments}) {
                     "body": "",
                     "username": loggedInUser.username
                 });
+                setNewCommentId(postedComment.comment_id)
             })
             .catch((err) => {
                 setPosting("error");
@@ -53,6 +53,7 @@ function CommentPoster({setComments}) {
                     revisedComments.shift()
                     return revisedComments
                 })
+                setNewCommentId("")
             })
     }
 

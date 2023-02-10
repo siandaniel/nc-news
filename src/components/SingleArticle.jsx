@@ -12,6 +12,7 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
     const [articleAuthor, setArticleAuthor] = useState({});
     const [votes, setVotes] = useState();
     const [voteError, setVoteError] = useState("");
+    const { title, article_img_url, author, topic, created_at, body } = singleArticle;
 
     useEffect(() => {
         setError(null)
@@ -87,8 +88,6 @@ function SingleArticle({ isLoading, setIsLoading, userVoteRecord, setUserVoteRec
     if (error) {
         return <ErrorPage error={error}/>
     }
-
-    const { title, article_img_url, author, topic, created_at, body } = singleArticle;
 
     return (
         <section>

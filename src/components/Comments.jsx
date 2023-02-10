@@ -10,8 +10,11 @@ function Comments() {
     const { loggedInUser } = useContext(LoggedInUserContext);
     const [comments, setComments] = useState([]);
     const [commentsLoading, setCommentsLoading] = useState();
+    const [posting, setPosting] = useState("");
+    const [newCommentId, setNewCommentId] = useState("");
 
     useEffect(() => {
+        setPosting("");
         setCommentsLoading(true);
         getCommentsByArticleId(article_id)
             .then((commentsFromApi) => {
@@ -34,10 +37,10 @@ function Comments() {
             <h3>Comments</h3>
             {comments.length === 0 ? <p><b>There are no comments on this article yet. </b><em>Want to be the first to post?</em></p>: "" }
             {comments.length === 0 ? <br></br> : "" }
-            <CommentPoster setComments={setComments}/>
+            <CommentPoster setComments={setComments} posting={posting} setPosting={setPosting} newCommentId={newCommentId} setNewCommentId={setNewCommentId}/>
             <section className="comments-container">
                 {comments.map((comment) => {
-                    return <CommentCard comment={comment} key={comment.comment_id} />
+                    return <CommentCard comment={comment} setPosting={setPosting} newCommentId={newCommentId} key={comment.comment_id === "tbc" ? comment.created_at : comment.comment_id} setComments={setComments} />
                 })}
             </section>
         </section>
